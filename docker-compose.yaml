@@ -1,0 +1,19 @@
+version: '3'
+services:
+  react:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./app:/usr/src/app
+      - node_modules_value:/app/node_modules:cached
+    command: node
+    ports:
+     - 3000:3000 #localhost用
+     - 9005:9005 #firebase用にポートの公開
+     - 443:443 #HTTPSのポートを公開
+    tty: true 
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+volumes:
+  node_modules_value: {}
